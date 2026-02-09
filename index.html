@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walentynka ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffcccc 0%, #ff99aa 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            border: 3px solid #ff3366;
+        }
+        
+        h1 {
+            color: #ff3366;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .photo-frame {
+            background: linear-gradient(45deg, #ffccd5, #fff0f3);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 25px 0;
+            border: 2px dashed #ff3366;
+        }
+        
+        .photo-container {
+            width: 100%;
+            height: 250px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            background-color: #f8f8f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .user-text {
+            font-size: 1.3rem;
+            color: #333;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff5f7;
+            border-radius: 10px;
+            border-left: 4px solid #ff3366;
+        }
+        
+        .question {
+            font-size: 1.8rem;
+            color: #ff3366;
+            margin: 25px 0;
+            font-weight: bold;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        button {
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        #yes-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        #yes-btn:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+        
+        #no-btn {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        #no-btn:hover {
+            background-color: #da190b;
+            transform: scale(1.05);
+        }
+        
+        .windows-message {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            padding: 10px 15px;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #666;
+            border-left: 3px solid #0078d7;
+        }
+        
+        .heart {
+            color: #ff3366;
+            font-size: 2rem;
+            margin: 0 5px;
+        }
+        
+        .her-page h1 {
+            font-size: 5rem;
+            color: #ff3366;
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #ff3366;
+            border-radius: 50%;
+            opacity: 0;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .photo-error {
+            color: #666;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Strona 1 - Pytanie -->
+    <div id="page1" class="container">
+        <h1>Walentynka ❤️</h1>
+        
+        <div class="photo-frame">
+            <div class="photo-container">
+                <img src="122.jpg" alt="Przykładowe zdjęcie" id="walentynka-photo">
+            </div>
+            <div class="user-text">
+            Lusiaaaaaa
+            </div>
+        </div>
+        
+        <div class="question">Czy zostaniesz moją walentynką?</div>
+        
+        <div class="buttons">
+            <button id="yes-btn">TAK 😊</button>
+            <button id="no-btn">NIE 😞</button>
+        </div>
+        
+        
+    </div>
+    
+    <!-- Strona 2 - "Jej" -->
+    <div id="page2" class="container hidden her-page">
+        <h1>Jej! ❤️</h1>
+        
+        <div class="photo-frame">
+            <div class="user-text">
+                Kocham cie bardzo słodziaku!!!!!
+            </div>
+        </div>
+        
+    
+        
+        <div style="margin-top: 30px; font-size: 1.2rem; color: #ff3366;">
+            Dziękuję! Jesteś najlepsza! <span class="heart">❤️</span>
+        </div>
+    </div>
+
+    <script>
+        // Elementy DOM
+        const page1 = document.getElementById('page1');
+        const page2 = document.getElementById('page2');
+        const yesBtn = document.getElementById('yes-btn');
+        const noBtn = document.getElementById('no-btn');
+        const photo = document.getElementById('walentynka-photo');
+        
+        // Obsługa błędów ładowania zdjęcia
+        photo.addEventListener('error', function() {
+            console.log("Zdjęcie 122.jpg nie zostało znalezione");
+            const container = this.parentElement;
+            container.innerHTML = '<div class="photo-error">PRZYKŁADOWE ZDJĘCIE<br><small>(122.jpg nie znaleziono)</small></div>';
+            container.style.display = 'flex';
+            container.style.justifyContent = 'center';
+            container.style.alignItems = 'center';
+            container.style.flexDirection = 'column';
+        });
+        
+        // Obsługa kliknięcia TAK
+        yesBtn.addEventListener('click', function() {
+            // Przełącz strony
+            page1.classList.add('hidden');
+            page2.classList.remove('hidden');
+            
+            // Dodaj efekt konfetti
+            createConfetti();
+            
+            // Odtwórz dźwięk (opcjonalnie)
+            playSuccessSound();
+        });
+        
+        // Obsługa kliknięcia NIE (zabawna uciekająca funkcja)
+        noBtn.addEventListener('click', function() {
+            // Spraw, aby przycisk NIE uciekał
+            const button = this;
+            const container = button.parentElement;
+            
+            // Losowe pozycje
+            const maxX = container.offsetWidth - button.offsetWidth;
+            const maxY = container.offsetHeight - button.offsetHeight;
+            
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            
+            button.style.position = 'absolute';
+            button.style.left = randomX + 'px';
+            button.style.top = randomY + 'px';
+            
+            // Powiększ przycisk TAK
+            yesBtn.style.transform = 'scale(1.2)';
+            yesBtn.style.transition = 'transform 0.3s';
+            
+            // Zmień tekst na przycisku TAK
+            yesBtn.textContent = 'Proszę, kliknij TAK! 😢';
+        });
+        
+        // Funkcja tworząca efekt konfetti
+        function createConfetti() {
+            const colors = ['#ff3366', '#ff6699', '#ff99cc', '#ffccdd'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                
+                // Losowy kolor
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Losowa pozycja początkowa
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                
+                // Losowy rozmiar
+                const size = Math.random() * 10 + 5;
+                confetti.style.width = size + 'px';
+                confetti.style.height = size + 'px';
+                
+                document.body.appendChild(confetti);
+                
+                // Animacja
+                const animation = confetti.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(${window.innerHeight}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: Math.random() * 3000 + 2000,
+                    delay: Math.random() * 1000
+                });
+                
+                // Usuń element po zakończeniu animacji
+                animation.onfinish = () => confetti.remove();
+            }
+        }
+        
+        // Funkcja odtwarzająca dźwięk sukcesu (opcjonalna)
+        function playSuccessSound() {
+            // Tworzenie prostego dźwięku za pomocą Web Audio API
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = 523.25; // C5
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 1);
+            } catch (e) {
+                console.log("Audio API nie jest wspierane lub wyłączone");
+            }
+        }
+        
+        // Informacja w konsoli
+        console.log("Strona walentynkowa załadowana! ❤️");
+    </script>
+</body>
+</html>
